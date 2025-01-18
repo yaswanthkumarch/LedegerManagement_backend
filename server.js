@@ -1,5 +1,3 @@
-// server.js
-
 // Load environment variables from the .env file
 require('dotenv').config();
 
@@ -14,10 +12,10 @@ const app = express();
 const port = process.env.PORT || 5000; // Use the PORT from the .env file or fallback to 5000
 
 // Middleware setup
-app.use(cors());
-
-app.use(cors({ origin: 'http://localhost:3000' })); 
-
+// CORS configuration for localhost:3000
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow requests from localhost:3000 (React frontend)
+}));
 
 app.use(bodyParser.json()); // To parse JSON request bodies
 
@@ -25,10 +23,7 @@ app.use(bodyParser.json()); // To parse JSON request bodies
 const mongoURI = process.env.MONGO_URI;
 
 // Connect to MongoDB Atlas
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(mongoURI)
   .then(() => {
     console.log("Connected to MongoDB Atlas");
   })
@@ -79,3 +74,4 @@ app.get("/api/transactions", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
