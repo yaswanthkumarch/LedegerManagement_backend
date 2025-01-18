@@ -12,15 +12,27 @@ const app = express();
 const port = process.env.PORT || 5000; // Use the PORT from the .env file or fallback to 5000
 
 // Middleware setup
-// CORS configuration for localhost:3000
+const allowedOrigins = [
+  "http://localhost:3000", // For local development
+  "https://ledegermanagement-frontend.onrender.com", // For frontend on Render
+  "https://ledeger-management-frontend-a8lsnx7ko-yaswanthkumarchs-projects.vercel.app", // For frontend on Vercel
+];
+
+// CORS configuration to allow multiple origins
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from localhost:3000 (React frontend)
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      // Allow requests from allowed origins
+      callback(null, true);
+    } else {
+      // Reject requests from other origins
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ['GET', 'POST'], // Allow only GET and POST methods
+  credentials: true, // Allow credentials like cookies to be sent
 }));
 
-
-app.use(cors({
-  origin: 'https://ledegermanagement-frontend.onrender.com', // Allow requests from localhost:3000 (React frontend)
-}));
 app.use(bodyParser.json()); // To parse JSON request bodies
 
 // MongoDB connection URI from the .env file
@@ -78,4 +90,3 @@ app.get("/api/transactions", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
