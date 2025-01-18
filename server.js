@@ -15,6 +15,10 @@ const port = process.env.PORT || 5000; // Use the PORT from the .env file or fal
 
 // Middleware setup
 app.use(cors());
+
+app.use(cors({ origin: 'http://localhost:3000' })); 
+
+
 app.use(bodyParser.json()); // To parse JSON request bodies
 
 // MongoDB connection URI from the .env file
