@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables from the .env file
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -5,14 +7,14 @@ const cors = require("cors");
 
 // Initialize the Express app
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000; // Use the PORT from the .env file or fallback to 5000
 
 // Middleware setup
 app.use(cors());
 app.use(bodyParser.json()); // To parse JSON request bodies
 
-// MongoDB connection URI
-const mongoURI = "mongodb+srv://yash:yaSH%40123@ledegermanagement.miem6.mongodb.net/?retryWrites=true&w=majority&appName=Ledegermanagement";
+// MongoDB connection URI from the .env file
+const mongoURI = process.env.MONGO_URI;
 
 // Connect to MongoDB Atlas
 mongoose.connect(mongoURI, {
