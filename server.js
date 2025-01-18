@@ -17,6 +17,10 @@ app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from localhost:3000 (React frontend)
 }));
 
+
+app.use(cors({
+  origin: 'https://ledegermanagement-frontend.onrender.com', // Allow requests from localhost:3000 (React frontend)
+}));
 app.use(bodyParser.json()); // To parse JSON request bodies
 
 // MongoDB connection URI from the .env file
