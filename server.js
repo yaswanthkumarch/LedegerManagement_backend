@@ -1,5 +1,9 @@
-require('dotenv').config(); // Load environment variables from the .env file
+// server.js
 
+// Load environment variables from the .env file
+require('dotenv').config();
+
+// Import necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -28,8 +32,20 @@ mongoose.connect(mongoURI, {
     console.error("Error connecting to MongoDB Atlas:", err);
   });
 
-// Define the Transaction model
-const Transaction = require('./models/transaction.js'); // Assuming it's in a models directory
+// Define the Transaction model (models/transaction.js)
+const transactionSchema = new mongoose.Schema({
+  type: { type: String, required: true },
+  date: { type: String, required: true },
+  description: { type: String, required: true },
+  amount: { type: Number, default: 0 },
+  quantity: { type: Number, default: 0 },
+  price: { type: Number, default: 0 },
+  barnType: { type: String, default: "" },  // Barn Type for Barnee Karra Tobacco
+  numberOfKarra: { type: Number, default: 0 },  // Number of Karra for Barnee Karra Tobacco
+});
+
+// Create the Transaction model
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
 // POST route to add a new transaction
 app.post("/api/add-transaction", async (req, res) => {
