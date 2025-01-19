@@ -14,11 +14,10 @@ const port = process.env.PORT || 5000; // Use the PORT from the .env file or fal
 // Middleware setup
 const allowedOrigins = [
   "http://localhost:3000", // For local development
-  "https://ledegermanagement-frontend.onrender.com", // For frontend on Render 
-  
-  "https://transaction-management-puce.vercel.app/" , 
+  "https://ledegermanagement-frontend.onrender.com", // For frontend on Render
+  "https://transaction-management-puce.vercel.app/", 
   "https://transaction-management-mdbm.onrender.com/",
-"https://transaction-management-hx54eeig8-yaswanthkumarchs-projects.vercel.app/",
+  "https://transaction-management-hx54eeig8-yaswanthkumarchs-projects.vercel.app/",
   "https://ledeger-management-frontend-a8lsnx7ko-yaswanthkumarchs-projects.vercel.app", // For frontend on Vercel
 ];
 
