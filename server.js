@@ -63,7 +63,7 @@ const transactionSchema = new mongoose.Schema({
 });
 
 // Create the Transaction model
-const Transaction = mongoose.model("Transaction_26", transactionSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
 // POST route to add a new transaction
 app.post("/api/add-transaction", async (req, res) => {
